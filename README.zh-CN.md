@@ -1,4 +1,4 @@
-# Spec Kit 中文说明
+# Spec Kit 中文版
 
 <div align="center">
     <img src="./media/logo_large.webp" alt="Spec Kit Logo" width="200" height="200"/>
@@ -7,7 +7,7 @@
 </div>
 
 <p align="center">
-    <strong>一个开源工具包，帮助你把注意力放在产品场景和可预测的结果上，而不是从零开始为每一个部分进行 vibe coding。</strong>
+    <strong>一个开源工具包，帮助你聚焦产品场景和可预测的结果，而不是从零开始为每个部分进行 vibe coding。</strong>
 </p>
 
 <p align="center">
@@ -31,7 +31,7 @@
 - [🌍 社区](#-社区)
 - [🤖 支持的 AI 编码代理集成](#-支持的-ai-编码代理集成)
 - [🔧 Specify CLI 参考](#-specify-cli-参考)
-- [🧩 让 Spec Kit 适配你的需求：Extensions 与 Presets](#-让-spec-kit-适配你的需求extensions-与-presets)
+- [🧩 让 Spec Kit 归你所有：Extensions 与 Presets](#-让-spec-kit-归你所有extensions-与-presets)
 - [📦 Bundles：基于角色的配置方案](#-bundles基于角色的配置方案)
 - [📚 核心理念](#-核心理念)
 - [🌟 开发阶段](#-开发阶段)
@@ -45,33 +45,33 @@
 
 ## 🤔 什么是 Spec-Driven Development？
 
-Spec-Driven Development（规格驱动开发）**颠覆了**传统的软件开发方式。几十年来，代码一直是主角——规格说明只是我们搭建起来、又在“真正工作”开始后丢弃的脚手架。
+Spec-Driven Development（规格驱动开发）**改变了**传统软件开发的叙事方式。几十年来，代码一直被视为核心，而规格只是我们在开始编写“真正的代码”之前搭建起来、随后又丢弃的脚手架。
 
-但在 AI 时代，这种模式已经不再适用。
+但在 AI 时代，这一模型已经失效。
 
-当 AI 编码代理能够直接根据自然语言实现软件时，规格不再是可丢弃的规划文档，而是决定最终产物的 **事实来源（source of truth）**。Spec-Driven Development 的关键思想是：
+当 AI 编码代理能够直接基于自然语言实现软件时，规格就不再是可有可无的规划文档，而是决定最终构建内容的 **事实依据（source of truth）**。Spec-Driven Development 的核心在于：
 
-与其让 AI 代理从一次性提示直接生成代码，不如引导它遵循一个有纪律的流程：
+与其让 AI 代理从一次性提示直接生成代码，不如引导它遵循一个更有纪律的流程：
 
 1. 定义项目的治理原则
-2. 明确要构建什么以及为什么要构建
+2. 明确要构建什么，以及为什么要构建
 3. 创建包含架构与技术决策的实现计划
-4. 将计划拆解为任务
-5. 让编码代理在完整上下文中执行实现
+4. 将计划拆解成任务
+5. 让编码代理带着完整上下文执行实现
 
-这使 AI 生成的软件更加可预测、可审查，并且更符合你的目标。
+这样生成的软件会更可预测、更容易审查，也更符合你的目标。
 
 ## ⚡ 快速开始
 
 ### 1. 安装 Specify CLI
 
-需要先安装 **[uv](https://docs.astral.sh/uv/)**（[安装 uv](./docs/install/uv.md)）。请将 `vX.Y.Z` 替换为 [Releases](https://github.com/github/spec-kit/releases) 中的最新标签：
+需要先安装 **[uv](https://docs.astral.sh/uv/)**（[安装 uv](./docs/install/uv.md)）。将 `vX.Y.Z` 替换为 [Releases](https://github.com/github/spec-kit/releases) 中的最新标签：
 
 ```bash
 uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@vX.Y.Z
 ```
 
-如需替代安装方式、验证、升级和故障排查，请参阅 [安装指南](./docs/installation.md)。
+如需了解其他安装方式、验证、升级和排障，请参阅 [安装指南](./docs/installation.md)。
 
 ### 2. 初始化项目
 
@@ -80,29 +80,29 @@ specify init my-project --integration copilot
 cd my-project
 ```
 
-如需检查更新或升级已安装的 CLI，请使用自管理命令。详细场景和自定义选项请参阅 [升级指南](./docs/upgrade.md)。
+如果你想检查更新或升级已安装的 CLI，可以使用自管理命令。详细场景和自定义选项请参阅 [升级指南](./docs/upgrade.md)。
 
 ```bash
-# 检查是否有更新版本可用（只读，不会修改任何内容）
+# 检查是否有新版本可用（只读，不会修改任何内容）
 specify self check
 
-# 预览升级时会执行什么，但不真正升级
+# 预览升级会执行什么，但不真正升级
 specify self upgrade --dry-run
 
-# 直接升级到最新稳定版本（会自动识别 uv tool 或 pipx 安装方式）
+# 原地升级到最新稳定版本（会自动识别 uv tool 或 pipx 安装方式）
 specify self upgrade
 
-# 或固定到某个特定发布标签（将 vX.Y.Z[suffix] 替换为目标标签）
+# 或固定到某个特定发布标签（将 vX.Y.Z[suffix] 替换为你想要的标签）
 specify self upgrade --tag vX.Y.Z[suffix]
 ```
 
-直接执行 `specify self upgrade` 会立即生效，这种行为与 `pip install -U` 和 `npm update` 等无提示命令一致。对于 `uv tool` 安装，它会运行 `uv tool install specify-cli ...`。
+直接运行 `specify self upgrade` 会立即执行，这种行为与 `pip install -U` 和 `npm update` 这类不提示确认的命令一致。对于 `uv tool` 安装，它会运行 `uv tool install specify-cli ...`。
 
 ### 3. 建立项目原则
 
-在项目目录中启动你的编码代理。大多数代理会把 spec-kit 暴露为 `/speckit.*` 斜杠命令；Codex CLI 的 skills 模式则使用 `$speckit-*`；GitHub Copilot CLI 使用 `/agents/...` 风格的命令。
+在项目目录中启动你的编码代理。大多数代理会将 spec-kit 暴露为 `/speckit.*` 斜杠命令；Codex CLI 在 skills 模式下使用 `$speckit-*`；GitHub Copilot CLI 则使用 `/agents...` 风格命令。
 
-使用 **`/speckit.constitution`** 命令来创建项目的治理原则和开发指南，这些内容会指导后续所有开发工作。
+使用 **`/speckit.constitution`** 命令创建项目的治理原则和开发指南，这些内容将指导后续所有开发工作。
 
 ```bash
 /speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
@@ -110,7 +110,7 @@ specify self upgrade --tag vX.Y.Z[suffix]
 
 ### 4. 创建规格说明
 
-使用 **`/speckit.specify`** 命令描述你想构建的内容。重点关注 **是什么** 和 **为什么**，而不是技术栈。
+使用 **`/speckit.specify`** 命令描述你想构建的内容。重点关注 **做什么** 和 **为什么**，而不是技术栈。
 
 ```bash
 /speckit.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums should support custom titles and tags.
@@ -124,7 +124,7 @@ specify self upgrade --tag vX.Y.Z[suffix]
 /speckit.plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local database.
 ```
 
-### 6. 拆解为任务
+### 6. 拆解任务
 
 使用 **`/speckit.tasks`** 从实现计划中生成可执行的任务清单。
 
@@ -150,24 +150,24 @@ specify self upgrade --tag vX.Y.Z[suffix]
 
 ## 🌍 社区
 
-欢迎在 [Spec Kit 文档站点](https://github.github.io/spec-kit/) 上浏览社区贡献的资源：
+在 [Spec Kit 文档站点](https://github.github.io/spec-kit/) 上浏览社区贡献的资源：
 
-- [Extensions](https://github.github.io/spec-kit/community/extensions.html) —— 命令、钩子和能力扩展
+- [Extensions](https://github.github.io/spec-kit/community/extensions.html) —— 命令、钩子和能力
 - [Presets](https://github.github.io/spec-kit/community/presets.html) —— 模板和术语覆盖
-- [Bundles](https://github.github.io/spec-kit/community/bundles.html) —— 由现有组件组合而成的角色与团队配置
-- [Walkthroughs](https://github.github.io/spec-kit/community/walkthroughs.html) —— 端到端 SDD 场景
-- [Friends](https://github.github.io/spec-kit/community/friends.html) —— 基于或扩展 Spec Kit 的项目
+- [Bundles](https://github.github.io/spec-kit/community/bundles.html) —— 由现有组件组合而成的角色与团队方案
+- [Walkthroughs](https://github.github.io/spec-kit/community/walkthroughs.html) —— 端到端的 SDD 场景
+- [Friends](https://github.github.io/spec-kit/community/friends.html) —— 基于 Spec Kit 扩展或构建的项目
 
 > [!NOTE]
-> 社区贡献内容由各自作者独立创建和维护。安装前请审查源代码，并自行决定是否使用。
+> 社区贡献内容由各自作者独立创建和维护。安装前请先审查源代码，并自行决定是否使用。
 
-想要贡献？请查看 [Extension Publishing Guide](extensions/EXTENSION-PUBLISHING-GUIDE.md)、[Presets Publishing Guide](presets/PUBLISHING.md)，或 [Community Bundles 指南](docs/community-bundles.md)。
+想要贡献？请参阅 [Extension Publishing Guide](extensions/EXTENSION-PUBLISHING-GUIDE.md)、[Presets Publishing Guide](presets/PUBLISHING.md)，或 [Community Bundles 指南](docs/community-bundles.md)。
 
 ## 🤖 支持的 AI 编码代理集成
 
-Spec Kit 可与 30+ 种 AI 编码代理协作——既支持 CLI 工具，也支持基于 IDE 的助手。完整列表、说明和使用细节请查看 [Supported AI Coding Agent Integrations](https://github.github.io/spec-kit/reference/integrations.html)。
+Spec Kit 支持 30+ 种 AI 编码代理——既包括 CLI 工具，也包括基于 IDE 的助手。完整列表、说明与使用细节请参阅 [Supported AI Coding Agent Integrations](https://github.github.io/spec-kit/reference/integrations.html)。
 
-运行 `specify integration list` 查看你当前安装版本中可用的全部集成。
+运行 `specify integration list` 可以查看你当前已安装版本支持的全部集成。
 
 ## 可用的斜杠命令
 
@@ -175,7 +175,7 @@ Spec Kit 可与 30+ 种 AI 编码代理协作——既支持 CLI 工具，也支
 
 ### 核心命令
 
-适用于 Spec-Driven Development 工作流的核心命令：
+Spec-Driven Development 工作流的核心命令：
 
 | 命令 | Agent Skill | 说明 |
 | --- | --- | --- |
@@ -183,9 +183,9 @@ Spec Kit 可与 30+ 种 AI 编码代理协作——既支持 CLI 工具，也支
 | `/speckit.specify` | `speckit-specify` | 定义你要构建什么（需求和用户故事） |
 | `/speckit.plan` | `speckit-plan` | 根据你选择的技术栈创建技术实现计划 |
 | `/speckit.tasks` | `speckit-tasks` | 生成可执行的实现任务列表 |
-| `/speckit.taskstoissues` | `speckit-taskstoissues` | 将生成的任务列表转换为 GitHub Issues 以便跟踪和执行 |
+| `/speckit.taskstoissues` | `speckit-taskstoissues` | 将生成的任务列表转换为 GitHub Issues，以便跟踪和执行 |
 | `/speckit.implement` | `speckit-implement` | 按照计划执行全部任务并构建功能 |
-| `/speckit.converge` | `speckit-converge` | 根据规格/计划/任务评估代码库，并把剩余工作补充为新的任务 |
+| `/speckit.converge` | `speckit-converge` | 评估代码库相对于规格/计划/任务的完成情况，并将剩余工作追加为新任务 |
 
 ### 可选命令
 
@@ -195,13 +195,13 @@ Spec Kit 可与 30+ 种 AI 编码代理协作——既支持 CLI 工具，也支
 | --- | --- | --- |
 | `/speckit.clarify` | `speckit-clarify` | 澄清描述不够明确的部分（建议在 `/speckit.plan` 前使用；此前名为 `/quizme`） |
 | `/speckit.analyze` | `speckit-analyze` | 跨制品一致性与覆盖率分析（在 `/speckit.tasks` 之后、`/speckit.implement` 之前运行） |
-| `/speckit.checklist` | `speckit-checklist` | 生成自定义质量检查清单，用于验证需求完整性、清晰度和一致性（相当于“英文版单元测试”） |
+| `/speckit.checklist` | `speckit-checklist` | 生成自定义质量检查清单，用于验证需求完整性、清晰度和一致性（类似“英文版单元测试”） |
 
 ## 🔧 Specify CLI 参考
 
 有关完整命令细节、选项和示例，请参阅 [CLI Reference](https://github.github.io/spec-kit/reference/overview.html)。
 
-## 🧩 让 Spec Kit 适配你的需求：Extensions 与 Presets
+## 🧩 让 Spec Kit 归你所有：Extensions 与 Presets
 
 Spec Kit 可以通过两个互补系统来适配你的需求——**extensions** 和 **presets**——再加上项目级覆盖配置来处理一次性的调整：
 
@@ -220,7 +220,7 @@ Spec Kit 可以通过两个互补系统来适配你的需求——**extensions**
 
 ### Extensions —— 添加新能力
 
-当你需要超出 Spec Kit 核心能力的功能时，请使用 **extensions**。扩展会引入新的命令和模板——例如添加领域特定工作流、与外部系统集成，或执行额外的验证步骤。
+当你需要超出 Spec Kit 核心能力的功能时，请使用 **extensions**。扩展会引入新的命令和模板——例如添加领域特定工作流、与外部系统集成，或增加额外的验证步骤。
 
 ```bash
 # 搜索可用扩展
@@ -246,13 +246,13 @@ specify preset search
 specify preset add <preset-name>
 ```
 
-例如，presets 可以重构规格模板以要求符合法规可追踪性，或将工作流适配为你使用的方法论（如 Agile、Kanban、Waterfall、jobs-to-be-done，或领域驱动设计等）。
+例如，presets 可以重构规格模板，以要求符合法规可追踪性，或将工作流适配为你采用的方法论（如 Agile、Kanban、Waterfall、jobs-to-be-done，或领域驱动设计等）。
 
 完整命令指南（包括解析顺序和优先级叠加）请参阅 [Presets reference](https://github.github.io/spec-kit/reference/presets.html)。
 
 ## 📦 Bundles：基于角色的配置方案
 
-Extensions 和 presets 是单独的构建块。**Bundle** 会把一组精选组件——扩展、预设、步骤和工作流——打包成一个单一、版本化、面向角色的配置方案（例如产品经理、业务分析师、安全研究员或开发者）。
+Extensions 和 presets 是独立的构建块。**Bundle** 会把一组精选组件——扩展、预设、步骤和工作流——打包成一个单一、版本化、面向角色的配置方案，例如产品经理、业务分析师、安全研究员或开发者。
 
 Bundle 通过手写的 `bundle.yml` 清单文件描述。它会为每个组件指定版本，并且可以选择绑定到某个特定集成；不指定 `integration` 的 bundle 是 **与集成无关的（agnostic）**。
 
@@ -580,7 +580,7 @@ Now I want you to go and audit the implementation plan and implementation detail
 
 - **按用户故事组织的任务拆解**——每个用户故事都会成为一个独立的实现阶段，包含自己的一组任务
 - **依赖关系管理**——任务排序会考虑组件之间的依赖关系（例如先模型、再服务、最后端点）
-- **并行执行标记**——可并行执行的任务会被标记为 `[P]`，以优化��发流程
+- **并行执行标记**——可并行执行的任务会被标记为 `[P]`，以优化开发流程
 - **文件路径说明**——每个任务都包含应实施的准确文件路径
 - **测试驱动开发结构**——如果要求测试，则会包含测试任务，并安排在实现之前编写
 - **检查点验证**——每个用户故事阶段都会包含检查点，用于验证独立功能
