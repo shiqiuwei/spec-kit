@@ -15,6 +15,10 @@
     <a href="https://github.github.io/spec-kit/"><img src="https://img.shields.io/badge/docs-GitHub_Pages-blue" alt="Documentation"/></a>
 </p>
 
+<p align="center">
+    English | <a href="./README.zh-CN.md">中文</a>
+</p>
+
 ---
 
 ## Table of Contents
@@ -39,7 +43,21 @@
 
 ## 🤔 What is Spec-Driven Development?
 
-Spec-Driven Development **flips the script** on traditional software development. For decades, code has been king — specifications were just scaffolding we built and discarded once the "real work" of coding began. Spec-Driven Development changes this: **specifications become executable**, directly generating working implementations rather than just guiding them.
+Spec-Driven Development **flips the script** on traditional software development. For decades, code has been king — specifications were just scaffolding we built and discarded once the "real work" began.
+
+That model breaks down in the AI era.
+
+When AI coding agents can implement software directly from natural language, a spec is no longer disposable planning paperwork — it's the **source of truth** that shapes what gets built. Spec-Driven Development puts the focus where it belongs: on clearly defining intent, constraints, and success criteria before implementation.
+
+Instead of asking an AI agent to generate code from a one-shot prompt, you guide it through a disciplined process:
+
+1. Define the constitutional rules of your project
+2. Specify what should be built and why
+3. Create an implementation plan with architecture and technical decisions
+4. Break the plan into tasks
+5. Let the coding agent execute with full context
+
+This makes AI-generated software more predictable, reviewable, and aligned with your goals.
 
 ## ⚡ Get Started
 
@@ -76,11 +94,11 @@ specify self upgrade
 specify self upgrade --tag vX.Y.Z[suffix]
 ```
 
-Bare `specify self upgrade` executes immediately, matching the no-prompt behavior of commands like `pip install -U` and `npm update`. For `uv tool` installs, it runs `uv tool install specify-cli --force --from <git ref>` under the hood so pinned release tags work, including dev, alpha/beta/rc, or build metadata suffixes. `uvx` (ephemeral) runs and source checkouts are detected and produce path-specific guidance instead of running an installer. Set `SPECIFY_UPGRADE_TIMEOUT_SECS` to cap how long the installer subprocess may run (default: no timeout — interrupt with `Ctrl+C` if needed).
+Bare `specify self upgrade` executes immediately, matching the no-prompt behavior of commands like `pip install -U` and `npm update`. For `uv tool` installs, it runs `uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@<target>`; for `pipx`, it runs the analogous `pipx install` command.
 
 ### 3. Establish project principles
 
-Launch your coding agent in the project directory. Most agents expose spec-kit as `/speckit.*` slash commands; Codex CLI in skills mode uses `$speckit-*` instead; GitHub Copilot CLI uses `/agents` to select the agent or address it directly in a prompt.
+Launch your coding agent in the project directory. Most agents expose spec-kit as `/speckit.*` slash commands; Codex CLI in skills mode uses `$speckit-*` instead; GitHub Copilot CLI uses `/agents`.
 
 Use the **`/speckit.constitution`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
 
@@ -93,7 +111,7 @@ Use the **`/speckit.constitution`** command to create your project's governing p
 Use the **`/speckit.specify`** command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
 
 ```bash
-/speckit.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums are never in other nested albums. Within each album, photos are previewed in a tile-like interface.
+/speckit.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums have names, cover photos, and tags. Photos can be imported from local folders and assigned to albums.
 ```
 
 ### 5. Create a technical implementation plan
@@ -101,7 +119,7 @@ Use the **`/speckit.specify`** command to describe what you want to build. Focus
 Use the **`/speckit.plan`** command to provide your tech stack and architecture choices.
 
 ```bash
-/speckit.plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database.
+/speckit.plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local SQLite database. The interface should be responsive and work offline.
 ```
 
 ### 6. Break down into tasks
@@ -145,13 +163,13 @@ Want to contribute? See the [Extension Publishing Guide](extensions/EXTENSION-PU
 
 ## 🤖 Supported AI Coding Agent Integrations
 
-Spec Kit works with 30+ AI coding agents — both CLI tools and IDE-based assistants. See the full list with notes and usage details in the [Supported AI Coding Agent Integrations](https://github.github.io/spec-kit/reference/integrations.html) guide.
+Spec Kit works with 30+ AI coding agents — both CLI tools and IDE-based assistants. See the full list with notes and usage details in the [Supported AI Coding Agent Integrations](https://github.github.io/spec-kit/reference/supported-agents.html).
 
 Run `specify integration list` to see all available integrations in your installed version.
 
 ## Available Slash Commands
 
-After running `specify init`, your AI coding agent will have access to these slash commands for structured development. For integrations that support skills mode, passing `--integration <agent> --integration-options="--skills"` installs agent skills instead of slash-command prompt files.
+After running `specify init`, your AI coding agent will have access to these slash commands for structured development. For integrations that support skills mode, passing `--integration <agent> --integration-options="--skills"` exposes the corresponding skill aliases instead.
 
 ### Core Commands
 
@@ -194,13 +212,13 @@ Spec Kit can be tailored to your needs through two complementary systems — **e
 
 - **Templates** are resolved at **runtime** — Spec Kit walks the stack top-down and uses the first match.
 - Project-local overrides (`.specify/templates/overrides/`) let you make one-off adjustments for a single project without creating a full preset.
-- **Extension/preset commands** are applied at **install time** — when you run `specify extension add` or `specify preset add`, command files are written into agent directories (e.g., `.claude/commands/`).
+- **Extension/preset commands** are applied at **install time** — when you run `specify extension add` or `specify preset add`, command files are written into agent directories (e.g., `.claude/commands`, `.github/prompts`) rather than being resolved dynamically.
 - If multiple presets or extensions provide the same command, the highest-priority version wins. On removal, the next-highest-priority version is restored automatically.
 - If no overrides or customizations exist, Spec Kit uses its core defaults.
 
 ### Extensions — Add New Capabilities
 
-Use **extensions** when you need functionality that goes beyond Spec Kit's core. Extensions introduce new commands and templates — for example, adding domain-specific workflows that are not covered by the built-in SDD commands, integrating with external tools, or adding entirely new development phases. They expand *what Spec Kit can do*.
+Use **extensions** when you need functionality that goes beyond Spec Kit's core. Extensions introduce new commands and templates — for example, adding domain-specific workflows that are not covered by the standard SDD process.
 
 ```bash
 # Search available extensions
@@ -212,11 +230,11 @@ specify extension add <extension-name>
 
 For example, extensions could add Jira integration, post-implementation code review, V-Model test traceability, or project health diagnostics.
 
-See the [Extensions reference](https://github.github.io/spec-kit/reference/extensions.html) for the full command guide. Browse the [community extensions](https://github.github.io/spec-kit/community/extensions.html) for what's available.
+See the [Extensions reference](https://github.github.io/spec-kit/reference/extensions.html) for the full command guide. Browse the [community extensions](https://github.github.io/spec-kit/community/extensions.html) catalog for examples.
 
 ### Presets — Customize Existing Workflows
 
-Use **presets** when you want to change *how* Spec Kit works without adding new capabilities. Presets override the templates and commands that ship with the core *and* with installed extensions — for example, enforcing a compliance-oriented spec format, using domain-specific terminology, or applying organizational standards to plans and tasks. They customize the artifacts and instructions that Spec Kit and its extensions produce.
+Use **presets** when you want to change *how* Spec Kit works without adding new capabilities. Presets override the templates and commands that ship with the core *and* with installed extensions — for example, adapting the spec structure for a regulatory environment or changing terminology to fit your team's process.
 
 ```bash
 # Search available presets
@@ -226,21 +244,15 @@ specify preset search
 specify preset add <preset-name>
 ```
 
-For example, presets could restructure spec templates to require regulatory traceability, adapt the workflow to fit the methodology you use (e.g., Agile, Kanban, Waterfall, jobs-to-be-done, or domain-driven design), add mandatory security review gates to plans, enforce test-first task ordering, or localize the entire workflow to a different language. The [pirate-speak demo](https://github.com/mnriem/spec-kit-pirate-speak-preset-demo) shows just how deep the customization can go. Multiple presets can be stacked with priority ordering.
+For example, presets could restructure spec templates to require regulatory traceability, adapt the workflow to fit the methodology you use (e.g., Agile, Kanban, Waterfall, jobs-to-be-done, or domain-driven design), or align output language and terminology for a particular organization.
 
 See the [Presets reference](https://github.github.io/spec-kit/reference/presets.html) for the full command guide, including resolution order and priority stacking.
 
 ## 📦 Bundles: Role-Based Setups
 
-Extensions and presets are individual building blocks. A **bundle** packages a
-curated set of them — extensions, presets, steps, and workflows — into a single,
-versioned, role-oriented setup so a whole team persona (product manager, business
-analyst, security researcher, developer, …) can be provisioned with one command.
+Extensions and presets are individual building blocks. A **bundle** packages a curated set of them — extensions, presets, steps, and workflows — into a single, versioned, role-oriented setup so a whole team persona (product manager, business analyst, security researcher, developer, …) can be provisioned with one command.
 
-A bundle is described by a hand-written `bundle.yml` manifest. It pins each
-component to a version and, optionally, targets a specific integration; a bundle
-with no `integration` is **agnostic** and inherits whatever integration the
-project already uses.
+A bundle is described by a hand-written `bundle.yml` manifest. It pins each component to a version and, optionally, targets a specific integration; a bundle with no `integration` is **agnostic** and inherits whatever integration the project already uses.
 
 ```bash
 # Discover bundles in the active catalog stack
@@ -258,29 +270,18 @@ specify bundle update <bundle-id>     # or --all
 specify bundle remove <bundle-id>     # removes only this bundle's components
 ```
 
-Bundles resolve from a **priority-ordered catalog stack** (project > user >
-built-in). Each source carries an install policy: `install-allowed` sources can
-be installed from, while `discovery-only` sources are visible in `search`/`info`
-but refuse installation. Manage the stack with `specify bundle catalog list|add|remove`.
+Bundles resolve from a **priority-ordered catalog stack** (project > user > built-in). Each source carries an install policy: `install-allowed` sources can be installed from, while `discovery-only` sources are visible in `search`/`info` but refuse installation. Manage the stack with `specify bundle catalog list|add|remove`.
 
-Authors validate and package bundles locally. Distribution is hosting the built
-artifact and adding a catalog source; community bundle submissions use the
-[Bundle Submission](https://github.com/github/spec-kit/issues/new?template=bundle_submission.yml)
-issue template so required component catalogs and install evidence can be reviewed:
+Authors validate and package bundles locally. Distribution is hosting the built artifact and adding a catalog source; community bundle submissions use the [Bundle Submission](https://github.com/github/spec-kit/issues/new?template=bundle_submission.yml) issue template so required component catalogs and install evidence can be reviewed:
 
 ```bash
 specify bundle validate --path ./my-bundle      # structural + reference checks
 specify bundle build --path ./my-bundle         # produce a versioned .zip artifact
 ```
 
-Four ready-to-read example manifests live under
-[`examples/bundles/`](examples/bundles/) (product manager, business analyst,
-security researcher, developer).
+Four ready-to-read example manifests live under [`examples/bundles/`](examples/bundles/) (product manager, business analyst, security researcher, developer).
 
-Key guarantees: `info` shows exactly what `install` adds (transparency);
-installs are idempotent and confined to the project root; `remove` never touches
-components another installed bundle still needs; and all consume/author commands
-work **offline** against local or pinned sources.
+Key guarantees: `info` shows exactly what `install` adds (transparency); installs are idempotent and confined to the project root; `remove` never touches components another installed bundle still needs; and all consume/author commands work **offline** against local or pinned sources.
 
 ### When to Use Which
 
@@ -297,24 +298,20 @@ work **offline** against local or pinned sources.
 
 Spec-Driven Development is a structured process that emphasizes:
 
-- **Intent-driven development** where specifications define the "*what*" before the "*how*"
+- **Intent-driven development** where specifications define the *what* before the *how*
 - **Rich specification creation** using guardrails and organizational principles
 - **Multi-step refinement** rather than one-shot code generation from prompts
 - **Heavy reliance** on advanced AI model capabilities for specification interpretation
 
 ## 🌟 Development Phases
 
-| Phase                                    | Focus                    | Key Activities                                                                                                                                                     |
-| ---------------------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **0-to-1 Development** ("Greenfield")    | Generate from scratch    | <ul><li>Start with high-level requirements</li><li>Generate specifications</li><li>Plan implementation steps</li><li>Build production-ready applications</li></ul> |
-| **Creative Exploration**                 | Parallel implementations | <ul><li>Explore diverse solutions</li><li>Support multiple technology stacks & architectures</li><li>Experiment with UX patterns</li></ul>                         |
-| **Iterative Enhancement** ("Brownfield") | Brownfield modernization | <ul><li>Add features iteratively</li><li>Modernize legacy systems</li><li>Adapt processes</li></ul>                                                                |
+| Phase                                    | Focus                    | Key Activities |
+| ---------------------------------------- | ------------------------ | -------------- |
+| **0-to-1 Development** ("Greenfield")    | Generate from scratch    | Start with high-level requirements, generate specifications, plan implementation steps, build and refine |
+| **Creative Exploration**                 | Parallel implementations | Explore diverse solutions, support multiple technology stacks & architectures, experiment with UX patterns |
+| **Iterative Enhancement** ("Brownfield") | Brownfield modernization | Add features iteratively, modernize legacy systems, adapt existing processes |
 
-For existing projects, keep Spec Kit tooling updates separate from feature
-artifact evolution: refresh managed project files when upgrading, and update
-`specs/` artifacts when intended behavior changes. The
-[Evolving Specs guide](./docs/guides/evolving-specs.md) describes the
-recommended brownfield loop.
+For existing projects, keep Spec Kit tooling updates separate from feature artifact evolution: refresh managed project files when upgrading, and update `specs/` artifacts when intended behavior changes. The [Evolving Specs guide](./docs/guides/evolving-specs.md) describes the recommended brownfield loop.
 
 ## 🎯 Experimental Goals
 
@@ -384,7 +381,7 @@ specify init --here --force
 
 ![Specify CLI bootstrapping a new project in the terminal](./media/specify_cli.gif)
 
-In an interactive terminal, you will be prompted to select the coding agent integration you are using. In non-interactive sessions, such as CI or piped runs, `specify init` defaults to GitHub Copilot unless you pass `--integration`. You can also proactively specify the integration directly in the terminal:
+In an interactive terminal, you will be prompted to select the coding agent integration you are using. In non-interactive sessions, such as CI or piped runs, `specify init` defaults to GitHub Copilot unless you pass `--integration` explicitly.
 
 ```bash
 specify init <project_name> --integration copilot
@@ -406,7 +403,7 @@ specify init . --force --integration copilot
 specify init --here --force --integration copilot
 ```
 
-The CLI will check that your selected agent's CLI tool is installed (for integrations that require a CLI), such as Claude Code, Gemini CLI, Qwen Code, opencode, Codex CLI, Qoder CLI, Tabnine CLI, Kiro CLI, Pi Coding Agent, Oh My Pi, Forge, Goose, Mistral Vibe, or ZCode. If you don't have the required tool installed, or you prefer to get the templates without checking for the right tools, use `--ignore-agent-tools` with your command:
+The CLI will check that your selected agent's CLI tool is installed (for integrations that require a CLI), such as Claude Code, Gemini CLI, Qwen Code, opencode, Codex CLI, Qoder CLI, Tabnine CLI, and others. To skip these checks:
 
 ```bash
 specify init <project_name> --integration copilot --ignore-agent-tools
@@ -420,17 +417,17 @@ Go to the project folder and run your coding agent. In our example, we're using 
 
 You will know that things are configured correctly if you see the `/speckit.constitution`, `/speckit.specify`, `/speckit.plan`, `/speckit.tasks`, and `/speckit.implement` commands available.
 
-The first step should be establishing your project's governing principles using the `/speckit.constitution` command. This helps ensure consistent decision-making throughout all subsequent development phases:
+The first step should be establishing your project's governing principles using the `/speckit.constitution` command. This helps ensure consistent decision-making throughout all subsequent development.
 
 ```text
-/speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements. Include governance for how these principles should guide technical decisions and implementation choices.
+/speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements. Include governance for how these principles should guide implementation decisions.
 ```
 
-This step creates or updates the `.specify/memory/constitution.md` file with your project's foundational guidelines that the coding agent will reference during specification, planning, and implementation phases.
+This step creates or updates the `.specify/memory/constitution.md` file with your project's foundational guidelines that the coding agent will reference during specification, planning, and implementation.
 
 ### **STEP 2:** Create project specifications
 
-With your project principles established, you can now create the functional specifications. Use the `/speckit.specify` command and then provide the concrete requirements for the project you want to develop.
+With your project principles established, you can now create the functional specifications. Use the `/speckit.specify` command and then provide the concrete requirements for the project you want to build.
 
 > [!IMPORTANT]
 > Be as explicit as possible about *what* you are trying to build and *why*. **Do not focus on the tech stack at this point**.
@@ -506,7 +503,7 @@ tasks for each one randomly distributed into different states of completion. Mak
 one task in each stage of completion.
 ```
 
-You should also ask Claude Code to validate the **Review & Acceptance Checklist**, checking off the things that are validated/pass the requirements, and leave the ones that are not unchecked. The following prompt can be used:
+You should also ask Claude Code to validate the **Review & Acceptance Checklist**, checking off the things that are validated/pass the requirements, and leave the ones that are not unchecked. The details of this checklist depend on the template being used.
 
 ```text
 Read the review and acceptance checklist, and check off each item in the checklist if the feature spec meets the criteria. Leave it empty if it does not.
@@ -556,7 +553,7 @@ The output of this step will include a number of implementation detail documents
         └── spec.md
 ```
 
-Check the `research.md` document to ensure that the right tech stack is used, based on your instructions. You can ask Claude Code to refine it if any of the components stand out, or even have it check the locally-installed version of the platform/framework you want to use (e.g., .NET).
+Check the `research.md` document to ensure that the right tech stack is used, based on your instructions. You can ask Claude Code to refine it if any of the components stand out, or even have it do targeted web research if a dependency is rapidly changing.
 
 Additionally, you might want to ask Claude Code to research details about the chosen tech stack if it's something that is rapidly changing (e.g., .NET Aspire, JS frameworks), with a prompt like this:
 
@@ -588,23 +585,23 @@ That's way too untargeted research. The research needs to help you solve a speci
 With the plan in place, you should have Claude Code run through it to make sure that there are no missing pieces. You can use a prompt like this:
 
 ```text
-Now I want you to go and audit the implementation plan and the implementation detail files.
+Now I want you to go and audit the implementation plan and implementation detail files.
 Read through it with an eye on determining whether or not there is a sequence of tasks that you need
 to be doing that are obvious from reading this. Because I don't know if there's enough here. For example,
 when I look at the core implementation, it would be useful to reference the appropriate places in the implementation
 details where it can find the information as it walks through each step in the core implementation or in the refinement.
 ```
 
-This helps refine the implementation plan and helps you avoid potential blind spots that Claude Code missed in its planning cycle. Once the initial refinement pass is complete, ask Claude Code to go through the checklist once more before you can get to the implementation.
+This helps refine the implementation plan and helps you avoid potential blind spots that Claude Code missed in its planning cycle. Once the initial refinement pass is complete, ask Claude Code to apply those improvements.
 
-You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with a detailed description, to make sure that the effort is properly tracked.
+You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` with the specification and planning artifacts for review before implementation starts.
 
 > [!NOTE]
-> Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineered components or decisions exist, you can ask Claude Code to resolve them. Ensure that Claude Code follows the constitution in `.specify/memory/constitution.md` as the foundational piece that it must adhere to when establishing the plan.
+> Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineering is spotted, simplify it early.
 
 ### **STEP 6:** Generate task breakdown with /speckit.tasks
 
-With the implementation plan validated, you can now break down the plan into specific, actionable tasks that can be executed in the correct order. Use the `/speckit.tasks` command to automatically generate a detailed task breakdown from your implementation plan:
+With the implementation plan validated, you can now break down the plan into specific, actionable tasks that can be executed in the correct order. Use the `/speckit.tasks` command to automatically generate the tasks document:
 
 ```text
 /speckit.tasks
@@ -640,7 +637,7 @@ The `/speckit.implement` command will:
 > [!IMPORTANT]
 > The coding agent will execute local CLI commands (such as `dotnet`, `npm`, etc.) - make sure you have the required tools installed on your machine.
 
-Once the implementation is complete, test the application and resolve any runtime errors that may not be visible in CLI logs (e.g., browser console errors). You can copy and paste such errors back to your coding agent for resolution.
+Once the implementation is complete, test the application and resolve any runtime errors that may not be visible in CLI logs (e.g., browser console errors). You can copy and paste such errors back into the agent for debugging help.
 
 </details>
 
