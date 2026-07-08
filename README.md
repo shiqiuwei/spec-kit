@@ -1,13 +1,11 @@
-# Spec Kit 中文版
-
 <div align="center">
     <img src="./media/logo_large.webp" alt="Spec Kit Logo" width="200" height="200"/>
     <h1>🌱 Spec Kit</h1>
-    <h3><em>更快构建高质量软件。</em></h3>
+    <h3><em>Build high-quality software faster.</em></h3>
 </div>
 
 <p align="center">
-    <strong>一个开源工具包，帮助你聚焦产品场景和可预测的结果，而不是从零开始为每个部分进行 vibe coding。</strong>
+    <strong>An open source toolkit that allows you to focus on product scenarios and predictable outcomes instead of vibe coding every piece from scratch.</strong>
 </p>
 
 <p align="center">
@@ -18,435 +16,435 @@
 </p>
 
 <p align="center">
-    <strong>中文</strong> | <a href="./README.md">English</a>
+    English | <a href="./README.zh-CN.md">中文</a>
 </p>
 
 ---
 
-## 目录
+## Table of Contents
 
-- [🤔 什么是 Spec-Driven Development？](#-什么是-spec-driven-development)
-- [⚡ 快速开始](#-快速开始)
-- [📽️ 视频概览](#️-视频概览)
-- [🌍 社区](#-社区)
-- [🤖 支持的 AI 编码代理集成](#-支持的-ai-编码代理集成)
-- [🔧 Specify CLI 参考](#-specify-cli-参考)
-- [🧩 让 Spec Kit 归你所有：Extensions 与 Presets](#-让-spec-kit-归你所有extensions-与-presets)
-- [📦 Bundles：基于角色的配置方案](#-bundles基于角色的配置方案)
-- [📚 核心理念](#-核心理念)
-- [🌟 开发阶段](#-开发阶段)
-- [🎯 实验目标](#-实验目标)
-- [🔧 运行前提](#-运行前提)
-- [📖 了解更多](#-了解更多)
-- [📋 详细流程](#-详细流程)
-- [💬 支持](#-支持)
-- [🙏 致谢](#-致谢)
-- [📄 许可证](#-许可证)
+- [🤔 What is Spec-Driven Development?](#-what-is-spec-driven-development)
+- [⚡ Get Started](#-get-started)
+- [📽️ Video Overview](#️-video-overview)
+- [🌍 Community](#-community)
+- [🤖 Supported AI Coding Agent Integrations](#-supported-ai-coding-agent-integrations)
+- [🔧 Specify CLI Reference](#-specify-cli-reference)
+- [🧩 Making Spec Kit Your Own: Extensions & Presets](#-making-spec-kit-your-own-extensions--presets)
+- [📦 Bundles: Role-Based Setups](#-bundles-role-based-setups)
+- [📚 Core Philosophy](#-core-philosophy)
+- [🌟 Development Phases](#-development-phases)
+- [🎯 Experimental Goals](#-experimental-goals)
+- [🔧 Prerequisites](#-prerequisites)
+- [📖 Learn More](#-learn-more)
+- [📋 Detailed Process](#-detailed-process)
+- [💬 Support](#-support)
+- [🙏 Acknowledgements](#-acknowledgements)
+- [📄 License](#-license)
 
-## 🤔 什么是 Spec-Driven Development？
+## 🤔 What is Spec-Driven Development?
 
-Spec-Driven Development（规格驱动开发）**改变了**传统软件开发的叙事方式。几十年来，代码一直被视为核心，而规格只是我们在开始编写“真正的代码”之前搭建起来、随后又丢弃的脚手架。
+Spec-Driven Development **flips the script** on traditional software development. For decades, code has been king — specifications were just scaffolding we built and discarded once the "real work" began.
 
-但在 AI 时代，这一模型已经失效。
+That model breaks down in the AI era.
 
-当 AI 编码代理能够直接基于自然语言实现软件时，规格就不再是可有可无的规划文档，而是决定最终构建内容的 **事实依据（source of truth）**。Spec-Driven Development 的核心在于：
+When AI coding agents can implement software directly from natural language, a spec is no longer disposable planning paperwork — it's the **source of truth** that shapes what gets built. Spec-Driven Development is about:
 
-与其让 AI 代理从一次性提示直接生成代码，不如引导它遵循一个更有纪律的流程：
+Instead of asking an AI agent to generate code from a one-shot prompt, you guide it through a disciplined process:
 
-1. 定义项目的治理原则
-2. 明确要构建什么，以及为什么要构建
-3. 创建包含架构与技术决策的实现计划
-4. 将计划拆解成任务
-5. 让编码代理带着完整上下文执行实现
+1. Define the constitutional rules of your project
+2. Specify what should be built and why
+3. Create an implementation plan with architecture and technical decisions
+4. Break the plan into tasks
+5. Let the coding agent execute with full context
 
-这样生成的软件会更可预测、更容易审查，也更符合你的目标。
+This makes AI-generated software more predictable, reviewable, and aligned with your goals.
 
-## ⚡ 快速开始
+## ⚡ Get Started
 
-### 1. 安装 Specify CLI
+### 1. Install Specify CLI
 
-需要先安装 **[uv](https://docs.astral.sh/uv/)**（[安装 uv](./docs/install/uv.md)）。将 `vX.Y.Z` 替换为 [Releases](https://github.com/github/spec-kit/releases) 中的最新标签：
+Requires **[uv](https://docs.astral.sh/uv/)** ([install uv](./docs/install/uv.md)). Replace `vX.Y.Z` with the latest tag from [Releases](https://github.com/github/spec-kit/releases):
 
 ```bash
 uv tool install specify-cli --from git+https://github.com/github/spec-kit.git@vX.Y.Z
 ```
 
-如需了解其他安装方式、验证、升级和排障，请参阅 [安装指南](./docs/installation.md)。
+See the [Installation Guide](./docs/installation.md) for alternative methods, verification, upgrade, and troubleshooting.
 
-### 2. 初始化项目
+### 2. Initialize a project
 
 ```bash
 specify init my-project --integration copilot
 cd my-project
 ```
 
-如果你想检查更新或升级已安装的 CLI，可以使用自管理命令。详细场景和自定义选项请参阅 [升级指南](./docs/upgrade.md)。
+To check for updates or upgrade the installed CLI, use the self-management commands. See the [Upgrade Guide](./docs/upgrade.md) for detailed scenarios and customization options.
 
 ```bash
-# 检查是否有新版本可用（只读，不会修改任何内容）
+# Check whether a newer release is available (read-only — does not modify anything)
 specify self check
 
-# 预览升级会执行什么，但不真正升级
+# Preview what would run, without actually upgrading
 specify self upgrade --dry-run
 
-# 原地升级到最新稳定版本（会自动识别 uv tool 或 pipx 安装方式）
+# Upgrade in place to the latest stable release (auto-detects uv tool vs pipx install)
 specify self upgrade
 
-# 或固定到某个特定发布标签（将 vX.Y.Z[suffix] 替换为你想要的标签）
+# Or pin a specific release tag (replace vX.Y.Z[suffix] with your desired release tag)
 specify self upgrade --tag vX.Y.Z[suffix]
 ```
 
-直接运行 `specify self upgrade` 会立即执行，这种行为与 `pip install -U` 和 `npm update` 这类不提示确认的命令一致。对于 `uv tool` 安装，它会运行 `uv tool install specify-cli ...`。
+Bare `specify self upgrade` executes immediately, matching the no-prompt behavior of commands like `pip install -U` and `npm update`. For `uv tool` installs, it runs `uv tool install specify-cli ...`.
 
-### 3. 建立项目原则
+### 3. Establish project principles
 
-在项目目录中启动你的编码代理。大多数代理会将 spec-kit 暴露为 `/speckit.*` 斜杠命令；Codex CLI 在 skills 模式下使用 `$speckit-*`；GitHub Copilot CLI 则使用 `/agents...` 风格命令。
+Launch your coding agent in the project directory. Most agents expose spec-kit as `/speckit.*` slash commands; Codex CLI in skills mode uses `$speckit-*` instead; GitHub Copilot CLI uses `/agents...` style commands.
 
-使用 **`/speckit.constitution`** 命令创建项目的治理原则和开发指南，这些内容将指导后续所有开发工作。
+Use the **`/speckit.constitution`** command to create your project's governing principles and development guidelines that will guide all subsequent development.
 
 ```bash
 /speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements
 ```
 
-### 4. 创建规格说明
+### 4. Create the spec
 
-使用 **`/speckit.specify`** 命令描述你想构建的内容。重点关注 **做什么** 和 **为什么**，而不是技术栈。
+Use the **`/speckit.specify`** command to describe what you want to build. Focus on the **what** and **why**, not the tech stack.
 
 ```bash
 /speckit.specify Build an application that can help me organize my photos in separate photo albums. Albums are grouped by date and can be re-organized by dragging and dropping on the main page. Albums should support custom titles and tags.
 ```
 
-### 5. 创建技术实现计划
+### 5. Create a technical implementation plan
 
-使用 **`/speckit.plan`** 命令提供你的技术栈和架构选择。
+Use the **`/speckit.plan`** command to provide your tech stack and architecture choices.
 
 ```bash
 /speckit.plan The application uses Vite with minimal number of libraries. Use vanilla HTML, CSS, and JavaScript as much as possible. Images are not uploaded anywhere and metadata is stored in a local database.
 ```
 
-### 6. 拆解任务
+### 6. Break down into tasks
 
-使用 **`/speckit.tasks`** 从实现计划中生成可执行的任务清单。
+Use **`/speckit.tasks`** to create an actionable task list from your implementation plan.
 
 ```bash
 /speckit.tasks
 ```
 
-### 7. 执行实现
+### 7. Execute implementation
 
-使用 **`/speckit.implement`** 按照计划执行所有任务并构建你的功能。
+Use **`/speckit.implement`** to execute all tasks and build your feature according to the plan.
 
 ```bash
 /speckit.implement
 ```
 
-如需更详细的逐步说明，请查看我们的 [完整指南](./spec-driven.md)。
+For detailed step-by-step instructions, see our [comprehensive guide](./spec-driven.md).
 
-## 📽️ 视频概览
+## 📽️ Video Overview
 
-想看看 Spec Kit 的实际效果？观看我们的 [视频概览](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)！
+Want to see Spec Kit in action? Watch our [video overview](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)!
 
 [![Spec Kit video header](/media/spec-kit-video-header.jpg)](https://www.youtube.com/watch?v=a9eR1xsfvHg&pp=0gcJCckJAYcqIYzv)
 
-## 🌍 社区
+## 🌍 Community
 
-在 [Spec Kit 文档站点](https://github.github.io/spec-kit/) 上浏览社区贡献的资源：
+Explore community-contributed resources on the [Spec Kit docs site](https://github.github.io/spec-kit/):
 
-- [Extensions](https://github.github.io/spec-kit/community/extensions.html) —— 命令、钩子和能力
-- [Presets](https://github.github.io/spec-kit/community/presets.html) —— 模板和术语覆盖
-- [Bundles](https://github.github.io/spec-kit/community/bundles.html) —— 由现有组件组合而成的角色与团队方案
-- [Walkthroughs](https://github.github.io/spec-kit/community/walkthroughs.html) —— 端到端的 SDD 场景
-- [Friends](https://github.github.io/spec-kit/community/friends.html) —— 基于 Spec Kit 扩展或构建的项目
+- [Extensions](https://github.github.io/spec-kit/community/extensions.html) — commands, hooks, and capabilities
+- [Presets](https://github.github.io/spec-kit/community/presets.html) — template and terminology overrides
+- [Bundles](https://github.github.io/spec-kit/community/bundles.html) — role and team stacks composed from existing components
+- [Walkthroughs](https://github.github.io/spec-kit/community/walkthroughs.html) — end-to-end SDD scenarios
+- [Friends](https://github.github.io/spec-kit/community/friends.html) — projects that extend or build on Spec Kit
 
 > [!NOTE]
-> 社区贡献内容由各自作者独立创建和维护。安装前请先审查源代码，并自行决定是否使用。
+> Community contributions are independently created and maintained by their respective authors. Review source code before installation and use at your own discretion.
 
-想要贡献？请参阅 [Extension Publishing Guide](extensions/EXTENSION-PUBLISHING-GUIDE.md)、[Presets Publishing Guide](presets/PUBLISHING.md)，或 [Community Bundles 指南](docs/community-bundles.md)。
+Want to contribute? See the [Extension Publishing Guide](extensions/EXTENSION-PUBLISHING-GUIDE.md), the [Presets Publishing Guide](presets/PUBLISHING.md), or the [Community Bundles guide](docs/community-bundles.md).
 
-## 🤖 支持的 AI 编码代理集成
+## 🤖 Supported AI Coding Agent Integrations
 
-Spec Kit 支持 30+ 种 AI 编码代理——既包括 CLI 工具，也包括基于 IDE 的助手。完整列表、说明与使用细节请参阅 [Supported AI Coding Agent Integrations](https://github.github.io/spec-kit/reference/integrations.html)。
+Spec Kit works with 30+ AI coding agents — both CLI tools and IDE-based assistants. See the full list with notes and usage details in the [Supported AI Coding Agent Integrations](https://github.github.io/spec-kit/reference/integrations.html).
 
-运行 `specify integration list` 可以查看你当前已安装版本支持的全部集成。
+Run `specify integration list` to see all available integrations in your installed version.
 
-## 可用的斜杠命令
+## Available Slash Commands
 
-在运行 `specify init` 之后，你的 AI 编码代理将获得以下用于结构化开发的斜杠命令。对于支持 skills 模式的集成，传入 `--integration <agent> --skills` 时会生成相应的 skill 目录；其他集成则使用标准命令文件。
+After running `specify init`, your AI coding agent will have access to these slash commands for structured development. For integrations that support skills mode, passing `--integration <agent> --skills` will generate the corresponding skill directory; other integrations use standard command files.
 
-### 核心命令
+### Core Commands
 
-Spec-Driven Development 工作流的核心命令：
+Essential commands for the Spec-Driven Development workflow:
 
-| 命令 | Agent Skill | 说明 |
+| Command | Agent Skill | Description |
 | --- | --- | --- |
-| `/speckit.constitution` | `speckit-constitution` | 创建或更新项目治理原则和开发指南 |
-| `/speckit.specify` | `speckit-specify` | 定义你要构建什么（需求和用户故事） |
-| `/speckit.plan` | `speckit-plan` | 根据你选择的技术栈创建技术实现计划 |
-| `/speckit.tasks` | `speckit-tasks` | 生成可执行的实现任务列表 |
-| `/speckit.taskstoissues` | `speckit-taskstoissues` | 将生成的任务列表转换为 GitHub Issues，以便跟踪和执行 |
-| `/speckit.implement` | `speckit-implement` | 按照计划执行全部任务并构建功能 |
-| `/speckit.converge` | `speckit-converge` | 评估代码库相对于规格/计划/任务的完成情况，并将剩余工作追加为新任务 |
+| `/speckit.constitution` | `speckit-constitution` | Create or update project governing principles and development guidelines |
+| `/speckit.specify` | `speckit-specify` | Define what you want to build (requirements and user stories) |
+| `/speckit.plan` | `speckit-plan` | Create technical implementation plans with your chosen tech stack |
+| `/speckit.tasks` | `speckit-tasks` | Generate actionable task lists for implementation |
+| `/speckit.taskstoissues` | `speckit-taskstoissues` | Convert generated task lists into GitHub issues for tracking and execution |
+| `/speckit.implement` | `speckit-implement` | Execute all tasks to build the feature according to the plan |
+| `/speckit.converge` | `speckit-converge` | Assess the codebase against spec/plan/tasks and append remaining work as new tasks |
 
-### 可选命令
+### Optional Commands
 
-用于增强质量和验证的附加命令：
+Additional commands for enhanced quality and validation:
 
-| 命令 | Agent Skill | 说明 |
+| Command | Agent Skill | Description |
 | --- | --- | --- |
-| `/speckit.clarify` | `speckit-clarify` | 澄清描述不够明确的部分（建议在 `/speckit.plan` 前使用；此前名为 `/quizme`） |
-| `/speckit.analyze` | `speckit-analyze` | 跨制品一致性与覆盖率分析（在 `/speckit.tasks` 之后、`/speckit.implement` 之前运行） |
-| `/speckit.checklist` | `speckit-checklist` | 生成自定义质量检查清单，用于验证需求完整性、清晰度和一致性（类似“英文版单元测试”） |
+| `/speckit.clarify` | `speckit-clarify` | Clarify underspecified areas (recommended before `/speckit.plan`; formerly `/quizme`) |
+| `/speckit.analyze` | `speckit-analyze` | Cross-artifact consistency & coverage analysis (run after `/speckit.tasks`, before `/speckit.implement`) |
+| `/speckit.checklist` | `speckit-checklist` | Generate custom quality checklists that validate requirements completeness, clarity, and consistency (like "unit tests for English") |
 
-## 🔧 Specify CLI 参考
+## 🔧 Specify CLI Reference
 
-有关完整命令细节、选项和示例，请参阅 [CLI Reference](https://github.github.io/spec-kit/reference/overview.html)。
+For full command details, options, and examples, see the [CLI Reference](https://github.github.io/spec-kit/reference/overview.html).
 
-## 🧩 让 Spec Kit 归你所有：Extensions 与 Presets
+## 🧩 Making Spec Kit Your Own: Extensions & Presets
 
-Spec Kit 可以通过两个互补系统来适配你的需求——**extensions** 和 **presets**——再加上项目级覆盖配置来处理一次性的调整：
+Spec Kit can be tailored to your needs through two complementary systems — **extensions** and **presets** — plus project-local overrides for one-off adjustments:
 
-| 优先级 | 组件类型 | 位置 |
-| ---: | --- | --- |
-| 1 | Project-Local Overrides | `.specify/templates/overrides/` |
-| 2 | Presets — Customize core & extensions | `.specify/presets/templates/` |
-| 3 | Extensions — Add new capabilities | `.specify/extensions/templates/` |
-| 4 | Spec Kit Core — Built-in SDD commands & templates | `.specify/templates/` |
+| Priority | Component Type                                    | Location                         |
+| -------: | ------------------------------------------------- | -------------------------------- |
+|      ⬆ 1 | Project-Local Overrides                           | `.specify/templates/overrides/`  |
+|        2 | Presets — Customize core & extensions             | `.specify/presets/templates/`    |
+|        3 | Extensions — Add new capabilities                 | `.specify/extensions/templates/` |
+|      ⬇ 4 | Spec Kit Core — Built-in SDD commands & templates | `.specify/templates/`            |
 
-- **模板** 在 **运行时** 解析——Spec Kit 会自上而下遍历层级，并使用第一个匹配项。
-- 项目级覆盖（`.specify/templates/overrides/`）允许你针对单个项目做一次性调整，而无需创建完整 preset。
-- **扩展/预设命令** 在 **安装时** 应用——当你运行 `specify extension add` 或 `specify preset add` 时，命令文件会被写入代理目录（例如 `.claude/...`）。
-- 如果多个 presets 或 extensions 提供了同一个命令，则优先级最高的版本生效。删除后，会自动恢复次高优先级版本。
-- 如果不存在覆盖或定制，Spec Kit 会使用其核心默认配置。
+- **Templates** are resolved at **runtime** — Spec Kit walks the stack top-down and uses the first match.
+- Project-local overrides (`.specify/templates/overrides/`) let you make one-off adjustments for a single project without creating a full preset.
+- **Extension/preset commands** are applied at **install time** — when you run `specify extension add` or `specify preset add`, command files are written into agent directories (e.g., `.claude/...`).
+- If multiple presets or extensions provide the same command, the highest-priority version wins. On removal, the next-highest-priority version is restored automatically.
+- If no overrides or customizations exist, Spec Kit uses its core defaults.
 
-### Extensions —— 添加新能力
+### Extensions — Add New Capabilities
 
-当你需要超出 Spec Kit 核心能力的功能时，请使用 **extensions**。扩展会引入新的命令和模板——例如添加领域特定工作流、与外部系统集成，或增加额外的验证步骤。
+Use **extensions** when you need functionality that goes beyond Spec Kit's core. Extensions introduce new commands and templates — for example, adding domain-specific workflows that are not covered by the core commands.
 
 ```bash
-# 搜索可用扩展
+# Search available extensions
 specify extension search
 
-# 安装扩展
+# Install an extension
 specify extension add <extension-name>
 ```
 
-例如，扩展可以添加 Jira 集成、实现后代码评审、V-Model 测试追踪，或项目健康诊断。
+For example, extensions could add Jira integration, post-implementation code review, V-Model test traceability, or project health diagnostics.
 
-完整命令指南请参阅 [Extensions reference](https://github.github.io/spec-kit/reference/extensions.html)。浏览 [community extensions](https://github.github.io/spec-kit/community/extensions.html) 了解社区提供的扩展。
+See the [Extensions reference](https://github.github.io/spec-kit/reference/extensions.html) for the full command guide. Browse the [community extensions](https://github.github.io/spec-kit/community/extensions.html) for available community-contributed extensions.
 
-### Presets —— 定制现有工作流
+### Presets — Customize Existing Workflows
 
-当你希望改变 Spec Kit 的工作方式，但不增加新能力时，请使用 **presets**。Presets 会覆盖核心以及已安装扩展中提供的模板和命令，从而调整工作流程本身。
+Use **presets** when you want to change *how* Spec Kit works without adding new capabilities. Presets override the templates and commands that ship with the core *and* with installed extensions to adapt the workflow itself.
 
 ```bash
-# 搜索可用 presets
+# Search available presets
 specify preset search
 
-# 安装 preset
+# Install a preset
 specify preset add <preset-name>
 ```
 
-例如，presets 可以重构规格模板，以要求符合法规可追踪性，或将工作流适配为你采用的方法论（如 Agile、Kanban、Waterfall、jobs-to-be-done，或领域驱动设计等）。
+For example, presets could restructure spec templates to require regulatory traceability, or adapt the workflow to fit the methodology you use (e.g., Agile, Kanban, Waterfall, jobs-to-be-done, or domain-driven design).
 
-完整命令指南（包括解析顺序和优先级叠加）请参阅 [Presets reference](https://github.github.io/spec-kit/reference/presets.html)。
+See the [Presets reference](https://github.github.io/spec-kit/reference/presets.html) for the full command guide, including resolution order and priority stacking.
 
-## 📦 Bundles：基于角色的配置方案
+## 📦 Bundles: Role-Based Setups
 
-Extensions 和 presets 是独立的构建块。**Bundle** 会把一组精选组件——扩展、预设、步骤和工作流——打包成一个单一、版本化、面向角色的配置方案，例如产品经理、业务分析师、安全研究员或开发者。
+Extensions and presets are individual building blocks. A **bundle** packages a curated set of them — extensions, presets, steps, and workflows — into a single, versioned, role-oriented setup such as product manager, business analyst, security researcher, or developer.
 
-Bundle 通过手写的 `bundle.yml` 清单文件描述。它会为每个组件指定版本，并且可以选择绑定到某个特定集成；不指定 `integration` 的 bundle 是 **与集成无关的（agnostic）**。
+A bundle is described by a hand-written `bundle.yml` manifest. It pins each component to a version and, optionally, targets a specific integration; a bundle with no `integration` is **agnostic**.
 
 ```bash
-# 在当前目录的目录栈中发现 bundles
+# Discover bundles in the active catalog stack
 specify bundle search [<query>]
 
-# 查看某个 bundle 将添加的确切组件集合（与 install 的结果一致）
+# Inspect the exact component set a bundle will add (equals what install does)
 specify bundle info <bundle-id>
 
-# 一次性安装 bundle 的完整组件集合
+# Install a bundle's full component set in one operation
 specify bundle install <bundle-id>
 
-# 查看已安装内容，然后以非破坏方式更新或移除
+# See what's installed, then update or remove non-destructively
 specify bundle list
-specify bundle update <bundle-id>     # 或 --all
-specify bundle remove <bundle-id>     # 仅移除此 bundle 安装的组件
+specify bundle update <bundle-id>     # or --all
+specify bundle remove <bundle-id>     # removes only this bundle's components
 ```
 
-Bundle 会从一个 **按优先级排序的目录栈** 中解析（项目 > 用户 > 内置）。每个来源都带有安装策略：`install-allowed` 来源可安装，而 `discovery-only` 来源仅供发现。
+Bundles resolve from a **priority-ordered catalog stack** (project > user > built-in). Each source carries an install policy: `install-allowed` sources can be installed from, while `discovery-only` sources are discoverable only.
 
-作者在本地验证并打包 bundle。分发方式是托管构建产物并添加一个目录源；社区 bundle 提交使用 [Bundle Submission](https://github.com/github/spec-kit/issues/new?template=bundle_submission.yml) 流程。
+Authors validate and package bundles locally. Distribution is hosting the built artifact and adding a catalog source; community bundle submissions use the [Bundle Submission](https://github.com/github/spec-kit/issues/new?template=bundle_submission.yml) flow.
 
 ```bash
-specify bundle validate --path ./my-bundle      # 结构与引用检查
-specify bundle build --path ./my-bundle         # 生成版本化 .zip 产物
+specify bundle validate --path ./my-bundle      # structural + reference checks
+specify bundle build --path ./my-bundle         # produce a versioned .zip artifact
 ```
 
-[`examples/bundles/`](examples/bundles/) 下有四个可直接阅读的示例清单（产品经理、业务分析师、安全研究员、开发者）。
+Four ready-to-read example manifests live under [`examples/bundles/`](examples/bundles/) (product manager, business analyst, security researcher, developer).
 
-关键保证：`info` 展示的内容与 `install` 实际添加的内容完全一致（透明可见）；安装是幂等的，并且仅限于项目根目录；`remove` 不会触及仍被其他已安装 bundle 使用的组件。
+Key guarantees: `info` shows exactly what `install` adds (transparency); installs are idempotent and confined to the project root; `remove` never touches components still used by another installed bundle.
 
-### 何时使用哪一种
+### When to Use Which
 
-| 目标 | 使用 |
+| Goal | Use |
 | --- | --- |
-| 添加全新的命令或工作流 | Extension |
-| 自定义规格、计划或任务的格式 | Preset |
-| 集成外部工具或服务 | Extension |
-| 强制执行组织或监管标准 | Preset |
-| 发布可复用的领域特定模板 | 任选其一——presets 适合模板覆盖，extensions 适合与新命令一起打包模板 |
-| 一条命令配置完整的角色方案 | Bundle |
+| Add a brand-new command or workflow | Extension |
+| Customize the format of specs, plans, or tasks | Preset |
+| Integrate an external tool or service | Extension |
+| Enforce organizational or regulatory standards | Preset |
+| Ship reusable domain-specific templates | Either — presets for template overrides, extensions for templates bundled with new commands |
+| Provision a complete role-based setup in one command | Bundle |
 
-## 📚 核心理念
+## 📚 Core Philosophy
 
-Spec-Driven Development 是一个结构化流程，强调：
+Spec-Driven Development is a structured process that emphasizes:
 
-- **以意图驱动开发**：先用规格定义 *是什么*，再决定 *怎么做*
-- **创建丰富的规格**：借助约束和组织原则来提升规格质量
-- **多步骤细化**：避免只靠一次提示直接生成代码
-- **高度依赖**：依赖先进 AI 模型对规格的理解能力
+- **Intent-driven development** where specifications define the *what* before the *how*
+- **Rich specification creation** using guardrails and organizational principles
+- **Multi-step refinement** rather than one-shot code generation from prompts
+- **Heavy reliance** on advanced AI model capabilities for specification interpretation
 
-## 🌟 开发阶段
+## 🌟 Development Phases
 
-| 阶段 | 重点 | 关键活动 |
-| --- | --- | --- |
-| **0 到 1 开发**（“Greenfield”） | 从零生成 | 从高层需求开始，生成规格，规划实现步骤，构建并迭代完善 |
-| **创意探索** | 并行实现方案 | 探索多种解决方案，支持不同技术栈与架构，尝试不同 UX 模式 |
-| **迭代增强**（“Brownfield”） | 存量系统现代化 | 逐步添加功能，现代化遗留系统，适配现有流程 |
+| Phase                                    | Focus                    | Key Activities |
+| ---------------------------------------- | ------------------------ | -------------- |
+| **0-to-1 Development** ("Greenfield")   | Generate from scratch    | Start with high-level requirements, generate specifications, plan implementation steps, build and refine |
+| **Creative Exploration**                 | Parallel implementations | Explore diverse solutions, support multiple technology stacks & architectures, experiment with UX patterns |
+| **Iterative Enhancement** ("Brownfield") | Brownfield modernization | Add features iteratively, modernize legacy systems, adapt existing processes |
 
-对于已有项目，请将 Spec Kit 工具更新与功能制品演进分开处理：升级时刷新受管理的项目文件，在预期行为变更时更新 `specs/` 制品。
+For existing projects, keep Spec Kit tooling updates separate from feature artifact evolution: refresh managed project files when upgrading, and update `specs/` artifacts when intended behavior changes.
 
-## 🎯 实验目标
+## 🎯 Experimental Goals
 
-我们的研究与实验重点在于：
+Our research and experimentation focus on:
 
-### 技术无关性
+### Technology independence
 
-- 使用多种技术栈创建应用
-- 验证 Spec-Driven Development 是一种不绑定特定技术、编程语言或框架的流程
+- Create applications using diverse technology stacks
+- Validate the hypothesis that Spec-Driven Development is a process not tied to specific technologies, programming languages, or frameworks
 
-### 企业约束
+### Enterprise constraints
 
-- 展示关键业务应用的开发方式
-- 纳入组织级约束（云提供商、技术栈、工程实践）
-- 支持企业设计系统和合规要求
+- Demonstrate mission-critical application development
+- Incorporate organizational constraints (cloud providers, tech stacks, engineering practices)
+- Support enterprise design systems and compliance requirements
 
-### 以用户为中心的开发
+### User-centric development
 
-- 为不同用户群体和偏好构建应用
-- 支持多种开发方式（从 vibe-coding 到 AI-native development）
+- Build applications for different user cohorts and preferences
+- Support various development approaches (from vibe-coding to AI-native development)
 
-### 创意与迭代过程
+### Creative & iterative processes
 
-- 验证并行探索实现方案的概念
-- 提供健壮的迭代式功能开发工作流
-- 扩展流程以处理升级和现代化任务
+- Validate the concept of parallel implementation exploration
+- Provide robust iterative feature development workflows
+- Extend processes to handle upgrades and modernization tasks
 
-## 🔧 运行前提
+## 🔧 Prerequisites
 
 - **Linux/macOS/Windows**
-- [支持的](#-支持的-ai-编码代理集成) AI 编码代理
-- 用于包管理的 [uv](https://docs.astral.sh/uv/)（推荐）或用于持久安装的 [pipx](https://pipx.pypa.io/)
+- [Supported](#-supported-ai-coding-agent-integrations) AI coding agent.
+- [uv](https://docs.astral.sh/uv/) for package management (recommended) or [pipx](https://pipx.pypa.io/) for persistent installation
 - [Python 3.11+](https://www.python.org/downloads/)
 - [Git](https://git-scm.com/downloads)
 
-如果你在使用某个代理时遇到问题，请提交 issue，以便我们改进集成。
+If you encounter issues with an agent, please open an issue so we can refine the integration.
 
-## 📖 了解更多
+## 📖 Learn More
 
-- **[完整的 Spec-Driven Development 方法论](./spec-driven.md)** —— 对完整流程的深入讲解
-- **[详细演练](#-详细流程)** —— 分步骤实施指南
+- **[Complete Spec-Driven Development Methodology](./spec-driven.md)** - Deep dive into the full process
+- **[Detailed Walkthrough](#-detailed-process)** - Step-by-step implementation guide
 
 ---
 
-## 📋 详细流程
+## 📋 Detailed Process
 
 <details>
-<summary>点击展开详细的逐步演练</summary>
+<summary>Click to expand the detailed step-by-step walkthrough</summary>
 
-你可以使用 Specify CLI 来引导项目初始化，它会在你的环境中带入所需制品。运行：
+You can use the Specify CLI to bootstrap your project, which will bring in the required artifacts in your environment. Run:
 
 ```bash
 specify init <project_name>
 ```
 
-或者在当前目录中初始化：
+Or initialize in the current directory:
 
 ```bash
 specify init .
-# 或使用 --here 标志
+# or use the --here flag
 specify init --here
-# 当目录已有文件时跳过确认
+# Skip confirmation when the directory already has files
 specify init . --force
-# 或
+# or
 specify init --here --force
 ```
 
-![Specify CLI 在终端中引导新项目](./media/specify_cli.gif)
+![Specify CLI bootstrapping a new project in the terminal](./media/specify_cli.gif)
 
-在交互式终端中，你会被提示选择正在使用的编码代理集成。在 CI 或管道式运行等非交互式会话中，`specify init` 默认使用 GitHub Copilot 集成。
+In an interactive terminal, you will be prompted to select the coding agent integration you are using. In non-interactive sessions, such as CI or piped runs, `specify init` defaults to GitHub Copilot.
 
 ```bash
 specify init <project_name> --integration copilot
 specify init <project_name> --integration gemini
 specify init <project_name> --integration codex
 
-# 或在当前目录中：
+# Or in current directory:
 specify init . --integration copilot
 specify init . --integration codex --integration-options="--skills"
 
-# 或使用 --here 标志
+# or use --here flag
 specify init --here --integration copilot
 specify init --here --integration codex --integration-options="--skills"
 
-# 将内容强制合并到一个非空的当前目录
+# Force merge into a non-empty current directory
 specify init . --force --integration copilot
 
-# 或
+# or
 specify init --here --force --integration copilot
 ```
 
-CLI 会检查你所选代理所需的 CLI 工具是否已安装（对于需要 CLI 的集成），例如 Claude Code、Gemini CLI、Qwen Code、opencode、Codex CLI、Qoder CLI、Tabnine CLI 等。
+The CLI will check that your selected agent's CLI tool is installed (for integrations that require a CLI), such as Claude Code, Gemini CLI, Qwen Code, opencode, Codex CLI, Qoder CLI, Tabnine CLI, etc.
 
 ```bash
 specify init <project_name> --integration copilot --ignore-agent-tools
 ```
 
-### **步骤 1：** 建立项目原则
+### **STEP 1:** Establish project principles
 
-进入项目文件夹并运行你的编码代理。在我们的示例中使用的是 `claude`。
+Go to the project folder and run your coding agent. In our example, we're using `claude`.
 
 ![Bootstrapping Claude Code environment](./media/bootstrap-claude-code.gif)
 
-如果你能看到 `/speckit.constitution`、`/speckit.specify`、`/speckit.plan`、`/speckit.tasks` 和 `/speckit.implement` 命令，说明配置正确。
+You will know that things are configured correctly if you see the `/speckit.constitution`, `/speckit.specify`, `/speckit.plan`, `/speckit.tasks`, and `/speckit.implement` commands available.
 
-第一步应该是使用 `/speckit.constitution` 命令建立项目的治理原则。这有助于在后续所有开发过程中保持一致的决策。
+The first step should be establishing your project's governing principles using the `/speckit.constitution` command. This helps ensure consistent decision-making throughout all subsequent development.
 
 ```text
 /speckit.constitution Create principles focused on code quality, testing standards, user experience consistency, and performance requirements. Include governance for how these principles should guide tradeoffs.
 ```
 
-这一步会创建或更新 `.specify/memory/constitution.md` 文件，其中包含项目的基础准则，编码代理会在规格、规划和实现过程中引用这些内容。
+This step creates or updates the `.specify/memory/constitution.md` file with your project's foundational guidelines that the coding agent will reference during specification, planning, and implementation.
 
-### **步骤 2：** 创建项目规格
+### **STEP 2:** Create project specifications
 
-在建立项目原则之后，你就可以创建功能规格了。使用 `/speckit.specify` 命令，然后提供你要构建的项目的具体需求。
+With your project principles established, you can now create the functional specifications. Use the `/speckit.specify` command and then provide the concrete requirements for the project you want to build.
 
 > [!IMPORTANT]
-> 尽可能明确地描述你要构建什么以及为什么要构建。**此时不要关注技术栈**。
+> Be as explicit as possible about *what* you are trying to build and *why*. **Do not focus on the tech stack at this point**.
 
-示例提示词：
+An example prompt:
 
 ```text
 Develop Taskify, a team productivity platform. It should allow users to create projects, add team members, assign tasks, comment and move tasks between boards in Kanban style. In this initial phase for this feature, let's call it "Create Taskify," let's have multiple users but the users will be declared ahead of time, predefined. I want five users in two different categories, one product manager and four engineers. Let's create three different sample projects. Let's have the standard Kanban columns for the status of each task, such as "To Do," "In Progress," "In Review," and "Done." There will be no login for this application as this is just the very first testing thing to ensure that our basic features are set up. For each task in the UI for a task card, you should be able to change the current status of the task between the different columns in the Kanban work board. You should be able to leave an unlimited number of comments for a particular card. You should be able to, from that task card, assign one of the valid users. When you first launch Taskify, it's going to give you a list of the five users to pick from. There will be no password required. When you click on a user, you go into the main view, which displays the list of projects. When you click on a project, you open the Kanban board for that project. You're going to see the columns. You'll be able to drag and drop cards back and forth between different columns. You will see any cards that are assigned to you, the currently logged in user, in a different color from all the other ones, so you can quickly see yours. You can edit any comments that you make, but you can't edit comments that other people made. You can delete any comments that you made, but you can't delete comments anybody else made.
 ```
 
-输入该提示后，你应该会看到 Claude Code 启动规划和规格起草流程。Claude Code 还会触发一些内置脚本来设置仓库。
+After this prompt is entered, you should see Claude Code kick off the planning and spec drafting process. Claude Code will also trigger some of the built-in scripts to set up the repository.
 
-一旦这一步完成，你应该会得到一个新分支（例如 `001-create-taskify`），以及 `specs/001-create-taskify` 目录中的新规格。
+Once this step is completed, you should have a new branch created (e.g., `001-create-taskify`), as well as a new specification in the `specs/001-create-taskify` directory.
 
-生成的规格应包含用户故事和功能需求集合，具体格式由模板定义。
+The produced specification should contain a set of user stories and functional requirements, as defined in the template.
 
-此时，项目文件夹内容大致应如下所示：
+At this stage, your project folder contents should resemble the following:
 
 ```text
 .
@@ -469,42 +467,42 @@ Develop Taskify, a team productivity platform. It should allow users to create p
         └── spec.md
 ```
 
-### **步骤 3：** 功能规格澄清（规划前必需）
+### **STEP 3:** Functional specification clarification (required before planning)
 
-在创建基础规格后，你可以继续澄清第一轮尝试中未能正确捕获的需求。
+With the baseline specification created, you can go ahead and clarify any of the requirements that were not captured properly within the first shot attempt.
 
-你应该在创建技术计划 **之前** 运行结构化澄清流程，以减少后续返工。
+You should run the structured clarification workflow **before** creating a technical plan to reduce rework downstream.
 
-推荐顺序：
+Preferred order:
 
-1. 使用 `/speckit.clarify`（结构化）——顺序式、基于覆盖率的提问流程，并把答案记录在 Clarifications 部分。
-2. 如有需要，再补充自由形式的开放式修改。
+1. Use `/speckit.clarify` (structured) – sequential, coverage-based questioning that records answers in a Clarifications section.
+2. Optionally follow up with ad-hoc free-form refinement if something still feels vague.
 
-如果你有意跳过澄清（例如快速验证或探索性原型），请明确说明，以免代理因缺少澄清而阻塞。
+If you intentionally want to skip clarification (e.g., spike or exploratory prototype), explicitly state that so the agent doesn't block on missing clarifications.
 
-示例自由形式补充提示（在 `/speckit.clarify` 之后，如仍需进一步说明）：
+Example free-form refinement prompt (after `/speckit.clarify` if still needed):
 
 ```text
 For each sample project or project that you create there should be a variable number of tasks between 5 and 15 tasks for each one randomly distributed into different states of completion. Make sure that there's at least one task in each stage of completion.
 ```
 
-你还应该要求 Claude Code 验证 **Review & Acceptance Checklist**，勾选所有已验证/满足需求的项，对不满足的项保持未勾选。该清单有助于确保规格质量并减少遗漏。
+You should also ask Claude Code to validate the **Review & Acceptance Checklist**, checking off the things that are validated/pass the requirements, and leave the ones that are not unchecked. The checklist helps ensure spec quality and reduces omissions.
 
 ```text
 Read the review and acceptance checklist, and check off each item in the checklist if the feature spec meets the criteria. Leave it empty if it does not.
 ```
 
-重要的是，要把与 Claude Code 的交互当作澄清和追问规格的机会——**不要把它的第一版结果视为最终版**。
+It's important to use the interaction with Claude Code as an opportunity to clarify and ask questions around the specification - **do not treat its first attempt as final**.
 
-### **步骤 4：** 生成计划
+### **STEP 4:** Generate a plan
 
-现在你可以明确技术栈和其他技术要求了。你可以使用项目模板中内置的 `/speckit.plan` 命令，并搭配如下提示：
+You can now be specific about the tech stack and other technical requirements. You can use the `/speckit.plan` command that is built into the project template with a prompt like this:
 
 ```text
 We are going to generate this using .NET Aspire, using Postgres as the database. The frontend should use Blazor server with drag-and-drop task boards, real-time updates. There should be a REST API created with a projects API, tasks API, and a notifications API.
 ```
 
-这一步的输出会包含一系列实现细节文档，目录树大致如下：
+The output of this step will include a number of implementation detail documents, with your directory tree resembling this:
 
 ```text
 .
@@ -536,90 +534,90 @@ We are going to generate this using .NET Aspire, using Postgres as the database.
         └── spec.md
 ```
 
-检查 `research.md` 文档，确保技术栈与指令一致。如果有任何组件看起来不合适，你可以让 Claude Code 继续优化，甚至让它进一步研究这些组件。
+Check the `research.md` document to ensure that the right tech stack is used, based on your instructions. You can ask Claude Code to refine it if any of the components stand out, or even have it do further research on those components.
 
-此外，如果你选择的技术栈变化很快（例如 .NET Aspire、JavaScript 框架），还可以让 Claude Code 进一步研究该技术栈的细节，例如：
+Additionally, you might want to ask Claude Code to research details about the chosen tech stack if it's something that is rapidly changing (e.g., .NET Aspire, JS frameworks), with a prompt like this:
 
 ```text
 I want you to go through the implementation plan and implementation details, looking for areas that could benefit from additional research as .NET Aspire is a rapidly changing library. For those areas that you identify that require further research, I want you to update the research document with additional details about the specific versions that we are going to be using in this Taskify application and spawn parallel research tasks to clarify any details using research from the web.
 ```
 
-在这个过程中，你可能会发现 Claude Code 过度研究了错误的方向——你可以通过如下提示把它引导回正轨：
+During this process, you might find that Claude Code gets stuck researching the wrong thing - you can help nudge it in the right direction with a prompt like this:
 
 ```text
 I think we need to break this down into a series of steps. First, identify a list of tasks that you would need to do during implementation that you're not sure of or would benefit from further research. Write down a list of those tasks. And then for each one of these tasks, I want you to spin up a separate research task so that the net results is we are researching all of those very specific tasks in parallel. What I saw you doing was it looks like you were researching .NET Aspire in general and I don't think that's gonna do much for us in this case. That's way too untargeted research. The research needs to help you solve a specific targeted question.
 ```
 
 > [!NOTE]
-> Claude Code 可能会过于积极地添加你并未要求的组件。请要求它说明每项变更的理由和来源。
+> Claude Code might be over-eager and add components that you did not ask for. Ask it to clarify the rationale and the source of the change.
 
-### **步骤 5：** 让 Claude Code 验证计划
+### **STEP 5:** Have Claude Code validate the plan
 
-在有了计划之后，你应该让 Claude Code 再过一遍，以确保没有遗漏。你可以使用如下提示：
+With the plan in place, you should have Claude Code run through it to make sure that there are no missing pieces. You can use a prompt like this:
 
 ```text
 Now I want you to go and audit the implementation plan and implementation detail files. Read through it with an eye on determining whether or not there is a sequence of tasks that you need to be doing that are obvious from reading this. Because I don't know if there's enough here. For example, when I look at the core implementation, it would be useful to reference the appropriate places in the implementation details where it can find the information as it walks through each step in the core implementation or in the refinement.
 ```
 
-这有助于进一步优化实现计划，并帮助你避免 Claude Code 在规划过程中遗漏潜在盲点。完成初始优化后，还可以继续要求 Claude Code……
+This helps refine the implementation plan and helps you avoid potential blind spots that Claude Code missed in its planning cycle. Once the initial refinement pass is complete, ask Claude Code to...
 
-如果你安装了 [GitHub CLI](https://docs.github.com/en/github-cli/github-cli)，也可以让 Claude Code 直接从当前分支创建一个指向 `main` 的 pull request。
+You can also ask Claude Code (if you have the [GitHub CLI](https://docs.github.com/en/github-cli/github-cli) installed) to go ahead and create a pull request from your current branch to `main` when you're ready.
 
 > [!NOTE]
-> 在让代理执行实现之前，还值得提示 Claude Code 交叉检查细节，看看是否存在过度设计的部分（记住——它可能过于积极）。如果发现某些内容过于复杂，要求它解释原因并给出变更来源。
+> Before you have the agent implement it, it's also worth prompting Claude Code to cross-check the details to see if there are any over-engineered pieces (remember - it can be over-eager). If over-engineering is found, ask it to explain the rationale and source of the change.
 
-### **步骤 6：** 使用 /speckit.tasks 生成任务拆解
+### **STEP 6:** Generate task breakdown with /speckit.tasks
 
-在实现计划验证完成后，你现在可以将计划拆解为具体、可执行、且按正确顺序执行的任务。使用 `/speckit.tasks` 命令自动生成任务列表。
+With the implementation plan validated, you can now break down the plan into specific, actionable tasks that can be executed in the correct order. Use the `/speckit.tasks` command to automatically generate the task list.
 
 ```text
 /speckit.tasks
 ```
 
-这一步会在你的功能规格目录中创建一个 `tasks.md` 文件，其中包含：
+This step creates a `tasks.md` file in your feature specification directory that contains:
 
-- **按用户故事组织的任务拆解**——每个用户故事都会成为一个独立的实现阶段，包含自己的一组任务
-- **依赖关系管理**——任务排序会考虑组件之间的依赖关系（例如先模型、再服务、最后端点）
-- **并行执行标记**——可并行执行的任务会被标记为 `[P]`，以优化开发流程
-- **文件路径说明**——每个任务都包含应实施的准确文件路径
-- **测试驱动开发结构**——如果要求测试，则会包含测试任务，并安排在实现之前编写
-- **检查点验证**——每个用户故事阶段都会包含检查点，用于验证独立功能
+- **Task breakdown organized by user story** - Each user story becomes a separate implementation phase with its own set of tasks
+- **Dependency management** - Tasks are ordered to respect dependencies between components (e.g., models before services, services before endpoints)
+- **Parallel execution markers** - Tasks that can run in parallel are marked with `[P]` to optimize development workflow
+- **File path specifications** - Each task includes the exact file paths where implementation should occur
+- **Test-driven development structure** - If tests are requested, test tasks are included and ordered to be written before implementation
+- **Checkpoint validation** - Each user story phase includes checkpoints to validate independent functionality
 
-生成的 `tasks.md` 为 `/speckit.implement` 命令提供了清晰的路线图，确保实现过程系统化，在维护代码质量的同时支持逐步交付用户价值。
+The generated tasks.md provides a clear roadmap for the `/speckit.implement` command, ensuring systematic implementation that maintains code quality and allows for incremental delivery of user story value.
 
-### **步骤 7：** 实现
+### **STEP 7:** Implementation
 
-准备就绪后，使用 `/speckit.implement` 命令执行你的实现计划：
+Once ready, use the `/speckit.implement` command to execute your implementation plan:
 
 ```text
 /speckit.implement
 ```
 
-`/speckit.implement` 命令会：
+The `/speckit.implement` command will:
 
-- 验证所有前提是否已准备完毕（constitution、spec、plan 和 tasks）
-- 解析 `tasks.md` 中的任务拆解
-- 按正确顺序执行任务，并遵守依赖关系和并行执行标记
-- 遵循任务计划中定义的 TDD 方法
-- 提供进度更新并妥善处理错误
+- Validate that all prerequisites are in place (constitution, spec, plan, and tasks)
+- Parse the task breakdown from `tasks.md`
+- Execute tasks in the correct order, respecting dependencies and parallel execution markers
+- Follow the TDD approach defined in your task plan
+- Provide progress updates and handle errors appropriately
 
 > [!IMPORTANT]
-> 编码代理会执行本地 CLI 命令（例如 `dotnet`、`npm` 等）——请确保你的机器上已安装所需工具。
+> The coding agent will execute local CLI commands (such as `dotnet`, `npm`, etc.) - make sure you have the required tools installed on your machine.
 
-实现完成后，请测试应用，并解决 CLI 日志中可能看不到的运行时错误（例如浏览器控制台错误）。你可以把这些错误复制粘贴回代理，让它继续修复。
+Once the implementation is complete, test the application and resolve any runtime errors that may not be visible in CLI logs (e.g., browser console errors). You can copy and paste such errors back to the agent to continue fixing them.
 
 </details>
 
 ---
 
-## 💬 支持
+## 💬 Support
 
-如需支持，请打开一个 [GitHub issue](https://github.com/github/spec-kit/issues/new)。我们欢迎 bug 报告、功能请求，以及关于如何使用 Spec-Driven Development 的问题。
+For support, please open a [GitHub issue](https://github.com/github/spec-kit/issues/new). We welcome bug reports, feature requests, and questions about using Spec-Driven Development.
 
-## 🙏 致谢
+## 🙏 Acknowledgements
 
-本项目深受 [John Lam](https://github.com/jflam) 的工作和研究启发，并在其基础上构建。
+This project is heavily influenced by and based on the work and research of [John Lam](https://github.com/jflam).
 
-## 📄 许可证
+## 📄 License
 
-本项目依据 MIT 开源许可证授权。完整条款请参阅 [LICENSE](./LICENSE) 文件。
+This project is licensed under the terms of the MIT open source license. Please refer to the [LICENSE](./LICENSE) file for the full terms.
